@@ -1,7 +1,6 @@
 package com.aceap.goodweather.ui.place
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
@@ -24,15 +23,11 @@ class PlaceAdapter(private val fragment: Fragment, private val placeList: List<P
         holder.itemView.setOnClickListener {
             val position = holder.bindingAdapterPosition
             val place = placeList[position]
-
-            Log.d("test", "onCreateViewHolder: $place")
             val intent = Intent(parent.context, WeatherActivity::class.java).apply {
-                putExtra("location_lng", String.format("%.4f", place.location.lng.toFloat()))
-                putExtra("location_lat", String.format("%.4f", place.location.lat.toFloat()))
-                putExtra ("place_name", place.name)
+                putExtra("location_lng", String.format("%.4f", place.location.lng.toDouble()))
+                putExtra("location_lat", String.format("%.4f", place.location.lat.toDouble()))
+                putExtra("place_name", place.name)
             }
-            Log.d("test", "onCreateViewHolder: $position")
-            Log.d("test", "onCreateViewHolder: ${parent.context}")
             startActivity(parent.context, intent, null)
             fragment.activity?.finish()
         }

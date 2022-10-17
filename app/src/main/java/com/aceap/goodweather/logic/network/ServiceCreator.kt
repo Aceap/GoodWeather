@@ -1,6 +1,5 @@
 package com.aceap.goodweather.logic.network
 
-import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -8,16 +7,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ServiceCreator {
-    private val interceptor = Interceptor{
+    private val interceptor = Interceptor {
         val request = it.request()
         val url = request.url().toString()
-        Log.d("url", "$url")
+//        Log.d("url", "$url")
         it.proceed(request)
     }
     private val builder: OkHttpClient.Builder = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .connectTimeout(10, TimeUnit.SECONDS)
-        .readTimeout(10,TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
         .writeTimeout(10, TimeUnit.SECONDS)
 
     val client: OkHttpClient = builder.build()

@@ -2,7 +2,6 @@ package com.aceap.goodweather.ui.weather
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -45,11 +44,8 @@ class WeatherActivity : AppCompatActivity() {
         if (viewModel.placeName.isEmpty()) {
             viewModel.placeName = intent.getStringExtra("place_name") ?: ""
         }
-        Log.d("test", "onCreate: ${viewModel.locationLng}, ${viewModel.locationLat}")
         viewModel.weatherLiveData.observe(this) {
-            Log.d("test", "onCreate: get success")
             val weather = it.getOrNull()
-            Log.d("test", "onCreate: $weather")
             if (weather != null) {
                 showWeatherInfo(weather)
             }
