@@ -30,4 +30,12 @@ object GoodWeatherNetWork {
             })
         }
     }
+
+    private val weatherService = ServiceCreator.create<WeatherService>()
+
+    suspend fun getDailyWeather(lng: String, lat: String) =
+        weatherService.getDailyWeather(lng, lat).await()
+
+    suspend fun getRealtimeWeather(lng: String, lat: String) =
+        weatherService.getRealTimeWeather(lng, lat).await()
 }
