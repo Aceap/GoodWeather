@@ -4,13 +4,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.aceap.goodweather.databinding.PlaceItemBinding
 import com.aceap.goodweather.logic.model.Place
 import com.aceap.goodweather.ui.weather.WeatherActivity
 
-class PlaceAdapter(private val fragment: Fragment, private val placeList: List<Place>) :
+class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: List<Place>) :
     RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
     inner class ViewHolder(binding: PlaceItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val placeName = binding.placeName
@@ -28,6 +27,7 @@ class PlaceAdapter(private val fragment: Fragment, private val placeList: List<P
                 putExtra("location_lat", String.format("%.4f", place.location.lat.toDouble()))
                 putExtra("place_name", place.name)
             }
+            fragment.viewModel.savePlace(place)
             startActivity(parent.context, intent, null)
             fragment.activity?.finish()
         }

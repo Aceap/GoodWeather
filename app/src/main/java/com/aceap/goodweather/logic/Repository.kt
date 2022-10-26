@@ -1,6 +1,8 @@
 package com.aceap.goodweather.logic
 
 import androidx.lifecycle.liveData
+import com.aceap.goodweather.logic.dao.PlaceDao
+import com.aceap.goodweather.logic.model.Place
 import com.aceap.goodweather.logic.model.Weather
 import com.aceap.goodweather.logic.network.GoodWeatherNetWork
 import kotlinx.coroutines.Dispatchers
@@ -34,15 +36,14 @@ object Repository {
                 val weather = Weather(realtimeResponse.result.realtime, dailyResponse.result.daily)
                 Result.success(weather)
             } else {
-                Result.failure(
-                    RuntimeException(
-                        "realtime response status is ${realtimeResponse.status}" + "daily response status is ${dailyResponse.status}"
-                    )
-                )
+                Result.failure(RuntimeException("realtime response status is ${realtimeResponse.status}" + "daily response status is ${dailyResponse.status}"))
             }
         }
-
     }
+
+    fun savePlace(place: Place) = PlaceDao.savePlace(place)
+    fun getSavedPlace() = PlaceDao.getSavedPlace()
+    fun isPlaceSaved() = PlaceDao.isPlaceSaved()
 
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
         liveData<Result<T>>(context) {
