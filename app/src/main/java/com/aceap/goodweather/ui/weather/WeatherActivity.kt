@@ -25,8 +25,8 @@ import java.util.*
 
 class WeatherActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWeatherBinding
-    private val viewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
-
+    val viewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
+    fun getDrawerLayout() = binding.drawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWeatherBinding.inflate(layoutInflater)
@@ -88,7 +88,7 @@ class WeatherActivity : AppCompatActivity() {
         }
     }
 
-    private fun refreshWeather() {
+    fun refreshWeather() {
         viewModel.refreshWeather(viewModel.locationLng, viewModel.locationLat)
         binding.swipeRefresh.isRefreshing = true
     }

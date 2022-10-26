@@ -3,7 +3,6 @@ package com.aceap.goodweather.ui.place
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.aceap.goodweather.databinding.PlaceItemBinding
 import com.aceap.goodweather.logic.model.Place
@@ -22,14 +21,27 @@ class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: L
         holder.itemView.setOnClickListener {
             val position = holder.bindingAdapterPosition
             val place = placeList[position]
-            val intent = Intent(parent.context, WeatherActivity::class.java).apply {
-                putExtra("location_lng", String.format("%.4f", place.location.lng.toDouble()))
-                putExtra("location_lat", String.format("%.4f", place.location.lat.toDouble()))
-                putExtra("place_name", place.name)
+            place.location.lng = String.format("%.4f", place.location.lng.toDouble())
+            place.location.lat = String.format("%.4f", place.location.lat.toDouble())
+            val activity = fragment.activity
+            if (activity is WeatherActivity) {
+                activity.getDrawerLayout().closeDrawers()
+                activity.viewModel.apply {
+                    locationLng = place.location.lng
+                    locationLat = place.location.lat
+                    placeName = place.name
+                }
+                activity.refreshWeather()
+            } else {
+                val intent = Intent(parent.context, WeatherActivity::class.java).apply {
+                    putExtra("location_lng", place.location.lng)
+                    putExtra("location_lat", place.location.lat)
+                    putExtra("place_name", place.name)
+                }
+                fragment.startActivity(intent)
+                fragment.activity?.finish()
             }
             fragment.viewModel.savePlace(place)
-            startActivity(parent.context, intent, null)
-            fragment.activity?.finish()
         }
         return holder
     }
