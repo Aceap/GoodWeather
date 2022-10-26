@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.aceap.goodweather.R
@@ -66,7 +65,7 @@ class WeatherActivity : AppCompatActivity() {
         val currentTempText = "${realtime.temperature.toInt()} ℃"
         binding.now.currentTemp.text = currentTempText
         binding.now.currentSky.text = getSky(realtime.skycon).info
-        val currentPM25Text = "空气指数 ${realtime.airQuality.aqi.chn.toInt()}"
+        val currentPM25Text = "空气指数 ${realtime.airQuality.aqi.chn}"
         binding.now.currentAQI.text = currentPM25Text
         binding.now.root.setBackgroundResource(getSky(realtime.skycon).bg)
         // 填充forecast.xml布局中的数据

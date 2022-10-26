@@ -2,12 +2,6 @@ package com.aceap.goodweather.logic.network
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.aceap.goodweather.logic.model.RealtimeResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -46,7 +40,7 @@ fun main() {
     println("DateTimeFormatter 自定义格式化: ${myDateTimeFormatter.format(LocalDateTime.now())}")
 
 // 用自定义格式解析:
-        val dt2 = LocalDateTime.parse("2020/11/30 15:16:17.123", myDateTimeFormatter)
+    val dt2 = LocalDateTime.parse("2020/11/30 15:16:17.123", myDateTimeFormatter)
     println("DateTimeFormatter 用自定义格式解析:  $dt2")
 
 }
