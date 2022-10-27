@@ -1,8 +1,10 @@
 package com.aceap.goodweather.ui.weather
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -45,11 +47,11 @@ class WeatherActivity : AppCompatActivity() {
         }
         binding.drawerLayout.addDrawerListener(object : DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                TODO("Not yet implemented")
+                Log.d(TAG, "onDrawerSlide: ")
             }
 
             override fun onDrawerOpened(drawerView: View) {
-                TODO("Not yet implemented")
+                Log.d(TAG, "onDrawerOpened: ")
             }
 
             override fun onDrawerClosed(drawerView: View) {
@@ -59,7 +61,7 @@ class WeatherActivity : AppCompatActivity() {
             }
 
             override fun onDrawerStateChanged(newState: Int) {
-                TODO("Not yet implemented")
+                Log.d(TAG, "onDrawerStateChanged: ")
             }
         })
         if (viewModel.locationLng.isEmpty()) {
