@@ -34,6 +34,7 @@ class WeatherActivity : AppCompatActivity() {
         binding = ActivityWeatherBinding.inflate(layoutInflater)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         window.statusBarColor = Color.TRANSPARENT
+        window.navigationBarColor = Color.TRANSPARENT
         ViewCompat.getWindowInsetsController(window.decorView)?.let { controller ->
 //            controller.hide(WindowInsetsCompat.Type.systemBars())
 //            controller.isAppearanceLightStatusBars = true
